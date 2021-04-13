@@ -1,22 +1,23 @@
 package com.chandu.service.fixedDeposit;
 
 import com.chandu.model.FixedDepositDetails;
-import com.chandu.repositories.fixedDeposit.FixedDepositDAO;
 
-import com.chandu.web.controller.FixedDepositController;
+
+import com.chandu.repositories.fixedDeposit.FixedDepositDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 public class FixedDespositServiceImpl implements  FixedDepositService{
-    private FixedDepositDAO fixedDepositDAO;
+    private FixedDepositDao fixedDepositDAO;
 
     private static Logger logger = LogManager.getLogger(FixedDespositServiceImpl.class);
 
-    public FixedDespositServiceImpl(FixedDepositDAO fixedDepositDAO)
+    public FixedDespositServiceImpl(FixedDepositDao fixedDepositDAO)
     {
         this.fixedDepositDAO = fixedDepositDAO;
         logger.info("creating FixedDespositServiceImpl");
+        logger.info("adding dao dependency to  FixedDespositServiceImpl "+fixedDepositDAO);
     }
 
 
@@ -25,6 +26,7 @@ public class FixedDespositServiceImpl implements  FixedDepositService{
         return fixedDepositDAO.getFixedDepositDetails(l);
     }
 
+    @Override
     public boolean createFixedDeposit(FixedDepositDetails fdd) {
         return fixedDepositDAO.createFixedDeposit(fdd);
     }

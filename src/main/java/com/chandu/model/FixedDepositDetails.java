@@ -13,6 +13,10 @@ public class FixedDepositDetails {
         this.email = email;
     }
 
+    public FixedDepositDetails() {
+
+    }
+
     public String toString() {
         return "id :" + id + ", deposit amount : " + depositAmount
                 + ", tenure : " + tenure + ", email : " + email;

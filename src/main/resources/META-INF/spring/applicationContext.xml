@@ -3,7 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="fixedDepositDao" class="com.chandu.repositories.fixedDeposit.FixedDepositDAO">
+    <bean id="fixedDepositDetails" class="com.chandu.model.FixedDepositDetails" scope="prototype">
+
+    </bean>
+
+    <bean id="fixedDepositDaoTest" class="com.chandu.factoryBeans.DaoFactory" factory-method="getFixedDepositDAO">
+        <constructor-arg index="0" value="JDBC"/>
+    </bean>
+
+    <bean id="fixedDepositDao" class="com.chandu.factoryBeans.DaoFactory" factory-method="getFixedDepositDAO">
+        <constructor-arg index="0" value="JDBC"/>
     </bean>
 
     <bean id="fixedDepositService" class="com.chandu.service.fixedDeposit.FixedDespositServiceImpl">
@@ -12,6 +21,23 @@
 
     <bean id ="fixedDepositController" class="com.chandu.web.controller.FixedDepositController">
         <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+    <bean id="jmsMessageSender" class="com.chandu.service.jms.JmsMessageSenderImpl">
+    </bean>
+
+    <bean id="emailMessageSender" class="com.chandu.service.email.EmailMessageSenderImpl">
+    </bean>
+
+    <bean id="webServiceInvoker" class="com.chandu.service.webservice.WebServiceInvokerImpl">
+    </bean>
+
+
+
+    <bean id="personalBankingService" class="com.chandu.service.personalBanking.PersonalBankingServiceImpl">
+        <constructor-arg index="0" ref="jmsMessageSender" />
+        <constructor-arg index="1" ref="emailMessageSender" />
+        <property name="webServiceInvoker" ref="webServiceInvoker" />
     </bean>
 
 </beans>
