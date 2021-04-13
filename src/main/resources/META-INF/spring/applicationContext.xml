@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="fixedDepositDao" class="com.chandu.repositories.fixedDeposit.FixedDepositDAO">
+    </bean>
+
+    <bean id="fixedDepositService" class="com.chandu.service.fixedDeposit.FixedDespositServiceImpl">
+        <constructor-arg name="fixedDepositDAO" ref="fixedDepositDao" />
+    </bean>
+
+    <bean id ="fixedDepositController" class="com.chandu.web.controller.FixedDepositController">
+        <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+</beans>
